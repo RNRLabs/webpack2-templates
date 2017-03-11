@@ -20,11 +20,12 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ["react-hot-loader", "babel-loader"]
+        use: ["react-hot-loader", "babel-loader"]
       },
       {
         test: /\.html$/,
-        loader: "file-loader?name=[name].[ext]"
+        exclude: /node_modules/,
+        use: "file-loader?name=[name].[ext]"
       },
     ],
   },
