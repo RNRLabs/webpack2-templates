@@ -20,23 +20,26 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ["react-hot-loader", "babel-loader"]
+        use: [
+          { loader: "react-hot-loader" },
+          { loader: "babel-loader" }
+        ]
       },
       {
         test: /\.html$/,
         exclude: /node_modules/,
-        use: "file-loader?name=[name].[ext]"
+        use: [
+          { loader: "file-loader", query: { name: "[name].[ext]" } }
+        ]
       },
       {
-            test: /\.scss$/,
-            use: [{
-                loader: "style-loader" // creates style nodes from JS strings
-            }, {
-                loader: "css-loader"   // translates CSS into CommonJS
-            }, {
-                loader: "sass-loader"  // compiles Sass to CSS
-            }]
-        }
-    ],
-  },
+        test: /\.scss$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader", query: { sourceMaps: true } },
+          { loader: "sass-loader" }
+        ]
+      }
+    ]
+  }
 }

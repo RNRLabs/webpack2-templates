@@ -1,7 +1,6 @@
 // index.js, (c) <rnrneverdies@gmail.com>
 
 // web-package dependenecies
-//import './index.html';
 import './index.scss';
 
 // client side app startup
