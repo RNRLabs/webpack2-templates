@@ -1,22 +1,52 @@
 // index.js, (c) <rnrneverdies@gmail.com>
-
-// web-package dependenecies
+// webpack2 dependenecies
 import './index.scss';
 
-// client side app startup
-console.log('started');
-
-// ES6 destructuring sample
-const o1 = { a: 1 };
-const o2 = { b: 2 };
-const o3 = { ...o1, ...o2 };
-
-console.log(o3);
-
+// app
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
 
-ReactDOM.render(
-  <h1>let's rock again!</h1>,
-  document.getElementById('root')
-);
+// simple reducer
+const counterReducer = (state = 0, action) => {
+  switch(action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
+    default:
+      return state;
+  }
+}
+
+const store = createStore(counterReducer);
+
+// counter component
+class Counter extends React.Component {
+  render() {
+    return (
+      <div
+        style={{"fontSize": "36px"}}
+        onClick={()=>{
+          store.dispatch({
+            type: 'INCREMENT'
+          });
+        }}>
+        {this.props.value}
+      </div>
+    );
+  }
+}
+
+// main render
+const render = () => {
+  ReactDOM.render(
+    <Counter
+      value={store.getState()}
+    />,
+    document.getElementById('root')
+  );
+}
+
+store.subscribe(render);
+render();
